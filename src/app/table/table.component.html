@@ -1,0 +1,77 @@
+<div class="tableContainer">
+  <mat-card>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let cust of CustomerData2; ">
+          <td>{{ cust.id }}</td>
+          <td *ngIf="cust.id === EditRowId">
+            <input type="text" [(ngModel)]="cust.name" />
+          </td> 
+          <td *ngIf="cust.id !== EditRowId" (click)="Edit(cust.id)">
+            {{ cust.name }}
+          </td>
+          <td *ngIf="cust.id === EditRowId">
+            <input type="text" [(ngModel)]="cust.email" />
+
+          </td>
+          <td *ngIf="cust.id !== EditRowId" (click)="Edit(cust.id)">
+            {{ cust.email}}
+          </td>
+          <button class="updateButton" (click)="updateItem(cust.id, cust.name,cust.email)">
+            Update
+          </button>
+          &nbsp;
+          <button class="deleteButton" (click)="deleteItem(cust.id)">
+            Delete
+          </button>
+          &nbsp;
+        </tr>
+
+        <ng-template #content let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add Customer</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control"  [(ngModel)]="this.name" type="text" placeholder="name" name="dp" >
+                  
+                </div>
+              </div>
+            </form>
+
+            <form>
+              <div class="form-group">
+                <label for="dateOfBirth"></label>
+                <div class="input-group">
+                  <input type="email" class="form-control" [(ngModel)]="this.email"  placeholder="email" name="dp" >
+
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="save(this.name,this.email)">Save</button>
+          </div>
+        </ng-template>
+
+        <button class="btn btn-lg btn-outline-primary" (click)="open(content)">ADD</button>
+
+      </tbody>
+     
+    </table>
+  </mat-card>
+</div>
