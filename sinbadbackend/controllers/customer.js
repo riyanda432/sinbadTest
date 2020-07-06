@@ -82,16 +82,18 @@ module.exports = {
     
     delete(req, res) {
         return Customers
-          .findByPk(req.body.id)
+          .findByPk(req.params.id)
           .then(cust => {
             if (!cust) {
               return res.status(400).send({
-                message: 'Cust Not Found',
+                message: 'Customer Not Found', 
               });
             }
             return cust
               .destroy()
-              .then(() => res.status(204).send())
+              .then(() => res.status(204).send({
+                message:'Customer has been deleted'
+              }))
               .catch((error) => res.status(400).send(error));
           })
           .catch((error) => res.status(400).send(error));

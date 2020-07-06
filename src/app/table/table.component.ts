@@ -1,13 +1,12 @@
 import { Component, PipeTransform ,OnInit} from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { Customer} from '../../services/customer.services'
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient, } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-  import { Http, Response,Headers,RequestOptions } from '@angular/http';
-  import { FormGroup, FormBuilder, Validators, FormControl, FormArray, NgForm } from '@angular/forms'
-  import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Http, Response,Headers,RequestOptions } from '@angular/http';
+import { FormGroup, FormBuilder, Validators, FormControl, FormArray, NgForm } from '@angular/forms'
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-table',
@@ -35,6 +34,10 @@ export class TableComponent implements OnInit {
   name:string =''
   email:string =''
 
+
+  page = 1;
+  pageSize = 4;
+  collectionSize = this.CustomerAdd2.length;
   private fieldArray: Array<any> = [];
 
   private newAttribute: any = {};
@@ -102,7 +105,7 @@ export class TableComponent implements OnInit {
    deleteItem(id){
       this.CustomerDelete = this.CustomerDataTemp.delete(id).subscribe(data=>{
         this.CustomerDelete2 = data
-        console.log("DELETE");
+        this.updateStatus = true
         if(this.updateStatus == true){
           this.CustomerData = this.CustomerDataTemp.fetchData().subscribe(data=>{
             this.CustomerData2 = data; 

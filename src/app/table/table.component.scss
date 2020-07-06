@@ -1,7 +1,7 @@
 .tableContainer{
     width: 70%;
     margin-left: 13%;
-    margin-top: 7%;
+    margin-top: 1%;
     background-color:#F0F4F8;
 }
 button.updateButton{
@@ -20,6 +20,15 @@ button.deleteButton{
     color:white;
     outline: none;
     padding: 6px;
+}
 
-
+button.addButton{
+    border-radius: 50px;
+    background-color: #0356B6;
+    border:none;
+    color:white;
+    margin-left: 40%;
+    margin-top: 1%;
+    outline: none;
+    padding: 10px;
 }
